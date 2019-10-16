@@ -16,16 +16,16 @@ template <class Type>
 class PriorityQueue
 {
 private:
-	// data here
+    int s;
 
 public:
    PriorityQueue(void);
 
    ~PriorityQueue(void);
 
-   bool isEmpty(void);
+   bool isEmpty() { return s == 0; }
 
-   int size(void);
+   int size() { return s; }
 
    // inserts a piece of data into the priority queue
    void insertItem ( Type data );
