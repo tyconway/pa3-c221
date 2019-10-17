@@ -3,7 +3,9 @@
 #include <fstream>
 #include <vector>
 // #include "PriorityQueue.h"
+#include "UnsortedPQ.h"
 #include "SortedPQ.h"
+#include "HeapPQ.h"
 
 vector<int> parseFile(string filename) {
     ifstream fin;
@@ -23,7 +25,7 @@ int main() {
     int type = data[0];
     PriorityQueue<int>* queue;
     if (type == 0) {
-        // queue = new UnsortedPQ<int>();
+        queue = new UnsortedPQ<int>();
     }
     else if (type == 1) {
         queue = new SortedPQ<int>();
@@ -34,5 +36,4 @@ int main() {
     else {
         return 0;
     }
-    cout << "here";
 }

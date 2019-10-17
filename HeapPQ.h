@@ -8,12 +8,12 @@
 using namespace std;
 
 template <class Type>
-class SortedPQ : public PriorityQueue<Type> {
+class HeapPQ : public PriorityQueue<Type> {
 public:
-    SortedPQ() {
+    HeapPQ() {
         cout << "Apposto.\n";
     }
-    ~SortedPQ() {
+    ~HeapPQ() {
     }
 
     void insertItem ( Type data ) {
