@@ -25,15 +25,26 @@ int main() {
     int type = data[0];
     PriorityQueue<int>* queue;
     if (type == 0) {
-        queue = new UnsortedPQ<int>();
+        delete queue;
+        UnsortedPQ<int>* queue = new UnsortedPQ<int>();
     }
     else if (type == 1) {
-        queue = new SortedPQ<int>();
+        delete queue;
+        SortedPQ<int>* queue = new SortedPQ<int>();
     }
     else if (type == 2) {
-        // queue = new HeapPQ<int>();
+        delete queue;
+        HeapPQ<int>* queue = new HeapPQ<int>();
     }
     else {
         return 0;
     }
+
+    queue->insertItem(1);
+    queue->insertItem(2);
+    queue->insertItem(3);
+    queue->insertItem(4);
+    cout << queue->minValue() << endl;
+    
+    cout << "Apposto.\n";
 }

@@ -11,7 +11,6 @@ template <class Type>
 class SortedPQ : public PriorityQueue<Type> {
 public:
     SortedPQ() {
-        cout << "Apposto.\n";
     }
     ~SortedPQ() {
     }
