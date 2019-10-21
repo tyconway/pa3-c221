@@ -17,11 +17,14 @@ public:
     UnsortedPQ() {
         s = 0;
     }
+
     ~UnsortedPQ() {
     }
+
     bool isEmpty() {
         return (s == 0);
     }
+    
     void insertItem ( Type data ) {
         Node<Type>* inserted = new Node<Type>(data);
         if (isEmpty()) {
@@ -38,6 +41,7 @@ public:
         printf("Inserted(%i)\n", inserted->getData());
         return;
     }
+
     Type removeMin ( void ) {
         return;
     }
@@ -46,14 +50,16 @@ public:
     // throws an exception if the queue is empty
     Type minValue () {
         // if (isEmpty()) ...
-        Type max = head->getData();
+        printf("here\n");
+        Type min = head->getData();
         Node<Type>* curr = head;
         while (curr) {
-            if (curr->getData() > max) {
-                max = curr->getData();
+            if (curr->getData() < min) {
+                min = curr->getData();
             }
+            curr = curr->getNext();
         }
-        return max;
+        return min;
     }
 };
 
