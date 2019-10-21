@@ -50,7 +50,10 @@ int main() {
     queue->insertItem(3);
     queue->insertItem(1);
     queue->insertItem(4);
-    // cout << queue->minValue() << endl;
+    queue->minValue();
+    queue->removeMin();
+    queue->removeMin();
+    queue->removeMin();
+    queue->removeMin();
     
-    cout << "Apposto.\n";
 }
