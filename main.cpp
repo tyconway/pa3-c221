@@ -44,16 +44,16 @@ int main() {
     // else {
     //     return 0;
     // }
-    UnsortedPQ<int>* queue = new UnsortedPQ<int>();
+    SortedPQ<int>* queue = new SortedPQ<int>();
 
-    queue->insertItem(2);
     queue->insertItem(3);
-    queue->insertItem(1);
+    queue->insertItem(2);
     queue->insertItem(4);
+    queue->insertItem(1);
+    queue->removeMin();
+    queue->removeMin();
+    queue->removeMin();
     queue->minValue();
-    queue->removeMin();
-    queue->removeMin();
-    queue->removeMin();
     queue->removeMin();
     
 }
