@@ -44,16 +44,21 @@ int main() {
     // else {
     //     return 0;
     // }
-    SortedPQ<int>* queue = new SortedPQ<int>();
+    HeapPQ<int>* queue = new HeapPQ<int>();
 
-    queue->insertItem(3);
+    queue->insertItem(70);
+    queue->insertItem(16);
+    queue->insertItem(42);
+    queue->insertItem(51);
+    // queue->insertItem(42);
+    queue->insertItem(42);
     queue->insertItem(2);
-    queue->insertItem(4);
-    queue->insertItem(1);
+    queue->insertItem(3);
+    queue->print();
     queue->removeMin();
-    queue->removeMin();
-    queue->removeMin();
-    queue->minValue();
-    queue->removeMin();
+    queue->print();
+    // queue->removeMin();
+    // queue->removeMin();
+    // queue->removeMin();
     
 }
