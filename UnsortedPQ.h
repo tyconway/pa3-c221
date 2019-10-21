@@ -5,6 +5,7 @@
 #include <exception>
 #include "PriorityQueue.h"
 #include "Node.h"
+#include "Exception.h"
 
 using namespace std;
 
@@ -49,7 +50,7 @@ public:
     // return the minimum value in the queue without removing it
     // throws an exception if the queue is empty
     Type minValue () {
-        // if (isEmpty()) ...
+        if (isEmpty()) { throw EmptyPQ(); }
         printf("here\n");
         Type min = head->getData();
         Node<Type>* curr = head;

@@ -46,11 +46,11 @@ int main() {
     // }
     UnsortedPQ<int>* queue = new UnsortedPQ<int>();
 
+    cout << queue->minValue() << endl;
     queue->insertItem(2);
     queue->insertItem(3);
     queue->insertItem(1);
     queue->insertItem(4);
-    cout << queue->minValue() << endl;
     
     cout << "Apposto.\n";
 }
