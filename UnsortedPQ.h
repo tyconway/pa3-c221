@@ -3,6 +3,7 @@
 // #define SORTED_PRIORITY_QUEUE_H 
 
 #include <exception>
+#include <list>
 #include "PriorityQueue.h"
 #include "Node.h"
 #include "Exception.h"
@@ -11,8 +12,7 @@ using namespace std;
 
 template <class Type>
 class UnsortedPQ : public PriorityQueue<Type> {
-    Node<Type>* head;
-    Node<Type>* tail;
+    list<Type> *queue = new list<Type>();
     int s;
 public:
     UnsortedPQ() {
@@ -23,24 +23,11 @@ public:
     }
 
     bool isEmpty() {
-        return (s == 0);
+        return (queue->empty());
     }
     
     void insertItem ( Type data ) {
-        Node<Type>* inserted = new Node<Type>(data);
-        if (isEmpty()) {
-            head = inserted;
-            tail = inserted;
-            s++;
-            printf("Inserted(%i)\n", inserted->getData());
-            return;
-        }
-        tail->setNext(inserted);
-        inserted->setPrev(tail);
-        tail = inserted;
-        s++;
-        printf("Inserted(%i)\n", inserted->getData());
-        return;
+        queue->push_back(data);
     }
 
     Type removeMin ( void ) {
@@ -51,16 +38,7 @@ public:
     // throws an exception if the queue is empty
     Type minValue () {
         if (isEmpty()) { throw EmptyPQ(); }
-        printf("here\n");
-        Type min = head->getData();
-        Node<Type>* curr = head;
-        while (curr) {
-            if (curr->getData() < min) {
-                min = curr->getData();
-            }
-            curr = curr->getNext();
-        }
-        return min;
+        return 1;
     }
 };
 
