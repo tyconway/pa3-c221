@@ -19,24 +19,24 @@ private:
     int s;
 
 public:
-   PriorityQueue(void);
+   PriorityQueue() {}
 
-   ~PriorityQueue(void);
+   ~PriorityQueue() {}
 
    bool isEmpty() { return s == 0; }
 
    int size() { return s; }
 
    // inserts a piece of data into the priority queue
-   void insertItem ( Type data );
+   void insertItem ( Type data ) {}
 
    // removes and returns the minimum value in the queue
    // throws an exception if the queue is empty
-   Type removeMin ( void );
+   Type removeMin () {}
 
    // return the minimum value in the queue without removing it
    // throws an exception if the queue is empty
-   Type minValue ( void );
+   Type minValue () { return 0; }
 };
 
 #endif
