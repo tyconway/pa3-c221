@@ -36,7 +36,7 @@ public:
 
    // return the minimum value in the queue without removing it
    // throws an exception if the queue is empty
-   Type minValue () {}
+   Type minValue () { return 0; }
 };
 
 #endif

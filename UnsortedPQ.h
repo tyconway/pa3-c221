@@ -15,24 +15,27 @@ class UnsortedPQ : public PriorityQueue<Type> {
     int s;
 public:
     UnsortedPQ() {
-        head = nullptr;
-        tail = nullptr;
         s = 0;
     }
     ~UnsortedPQ() {
     }
+    bool isEmpty() {
+        return (s == 0);
+    }
     void insertItem ( Type data ) {
-        Node<Type> inserted = new Node<Type>(data);
-        if (this->size() == 0) {
-            head->setNext(inserted);
-            tail->setPrev(inserted);
+        Node<Type>* inserted = new Node<Type>(data);
+        if (isEmpty()) {
+            head = inserted;
+            tail = inserted;
             s++;
+            printf("Inserted(%i)\n", inserted->getData());
             return;
         }
         tail->setNext(inserted);
-        inserted->setPrev(tail->getPrev);
+        inserted->setPrev(tail);
         tail = inserted;
         s++;
+        printf("Inserted(%i)\n", inserted->getData());
         return;
     }
     Type removeMin ( void ) {
