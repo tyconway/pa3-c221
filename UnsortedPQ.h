@@ -30,7 +30,6 @@ public:
     }
     
     void insertItem ( Type data ) {
-        printf("Inserted(%i)\n", data);
         queue->push_back(data);
     }
 
@@ -45,7 +44,6 @@ public:
             }
         }
         queue->erase(index);
-        printf("Erased(%i)\n", min);
         return min;
     }
 
@@ -57,7 +55,6 @@ public:
         for (auto it = queue->begin(); it != queue->end(); it++) {
             if (*it < min) min = *it; 
         }
-        printf("Min(%i)\n", min);
         return min;
     }
 };

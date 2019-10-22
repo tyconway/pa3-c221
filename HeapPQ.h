@@ -41,7 +41,6 @@ public:
         Type remove = vec.back();
         vec.pop_back();
 
-        printf("Remove(%i)\n", remove);
         fixHeap();
 
         return remove;
@@ -51,7 +50,6 @@ public:
     // throws an exception if the queue is empty
     Type minValue ( void ) {
         if (vec.empty()) throw EmptyPQ();
-        printf("Min(%i)\n", vec[0]);
         return vec[0];
     }
 
