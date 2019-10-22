@@ -57,7 +57,18 @@ int main() {
     queue->print();
     queue->removeMin();
     queue->print();
-    // queue->removeMin();
+    queue->removeMin();
+    queue->print();
+    queue->removeMin();
+    queue->print();
+    queue->removeMin();
+    queue->print();
+    queue->removeMin();
+    queue->print();
+    queue->removeMin();
+    queue->print();
+    queue->removeMin();
+    queue->print();
     // queue->removeMin();
     // queue->removeMin();
     

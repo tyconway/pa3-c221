@@ -19,7 +19,7 @@ public:
     }
 
     void insertItem ( Type data ) {
-        printf("Inserted(%i)\n", data);
+        // printf("Inserted(%i)\n", data);
         vec.push_back(data);
 
         fixHeap();
@@ -33,10 +33,9 @@ public:
         Type remove = vec.back();
         vec.pop_back();
 
-        fixHeap();
+        printf("Remove(%i)\n", remove);
         fixHeap();
 
-        printf("Remove(%i)\n", remove);
         return remove;
     }
 
@@ -49,10 +48,8 @@ public:
     }
 
     void fixHeap() {
-        printf("Fixing heap:\n");
         int currentIndex = vec.size() - 1;
         while (currentIndex != -1) {
-            print();
             Type current = vec[currentIndex];
             if (current < vec[parentIndex(currentIndex)]) {
                 swap(currentIndex, parentIndex(currentIndex));
@@ -64,7 +61,7 @@ public:
     }
 
     int parentIndex(int childIndex) {
-        return childIndex / 2;
+        return (childIndex - 1) / 2;
     }
 
     void swap(int leftIndex, int rightIndex) {
