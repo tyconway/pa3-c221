@@ -24,6 +24,10 @@ public:
     bool isEmpty() {
         return (queue->empty());
     }
+
+    int size() {
+        return queue->size();
+    }
     
     void insertItem ( Type data ) {
         printf("Inserted(%i)\n", data);

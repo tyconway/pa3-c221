@@ -2,6 +2,7 @@
 #include <string>
 #include <fstream>
 #include <vector>
+#include <string>
 // #include "PriorityQueue.h"
 #include "UnsortedPQ.h"
 #include "SortedPQ.h"
@@ -18,58 +19,36 @@ vector<int> parseFile(string filename) {
     return vector;
 }
 
+template <class Type>
+void testSuite(PriorityQueue<Type>& queue) {
+    cout << queue.isEmpty() << endl;
+}
+
 int main() {
+    string hey = "Hey\n";
+    string green = "\033[32m";
+    string normal = "\033[0m";
+
     cout << endl; 
 
     string file = "numbers.txt";
+    // Converts numbers.txt to vector
     vector<int> data = parseFile(file);
-    // pick which implementation:
     int type = data[0];
-    // PriorityQueue<int>* queue;
-    // if (type == 0) {
-    //     delete queue;
-    //     UnsortedPQ<int>* queue = new UnsortedPQ<int>();
-    //     printf("UnsortedPQ created\n");
-    // }
-    // else if (type == 1) {
-    //     delete queue;
-    //     SortedPQ<int>* queue = new SortedPQ<int>();
-    //     printf("SortedPQ created\n");
-    // }
-    // else if (type == 2) {
-    //     delete queue;
-    //     HeapPQ<int>* queue = new HeapPQ<int>();
-    //     printf("HeapPQ created\n");
-    // }
-    // else {
-    //     return 0;
-    // }
-    HeapPQ<int>* queue = new HeapPQ<int>();
+    if (type == 0) {
+        UnsortedPQ<int>* queue = new UnsortedPQ<int>();
+        testSuite(*queue);
+    }
+    else if (type == 1) {
+        SortedPQ<int>* queue = new SortedPQ<int>();
+        testSuite(*queue);
+    }
+    else if (type == 2) {
+        HeapPQ<int>* queue = new HeapPQ<int>();
+        testSuite(*queue);
+    }
+    else {
+        return 0;
+    }
 
-    queue->insertItem(70);
-    queue->insertItem(16);
-    queue->insertItem(42);
-    queue->insertItem(51);
-    // queue->insertItem(42);
-    queue->insertItem(42);
-    queue->insertItem(2);
-    queue->insertItem(3);
-    queue->print();
-    queue->removeMin();
-    queue->print();
-    queue->removeMin();
-    queue->print();
-    queue->removeMin();
-    queue->print();
-    queue->removeMin();
-    queue->print();
-    queue->removeMin();
-    queue->print();
-    queue->removeMin();
-    queue->print();
-    queue->removeMin();
-    queue->print();
-    // queue->removeMin();
-    // queue->removeMin();
-    
 }

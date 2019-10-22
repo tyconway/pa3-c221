@@ -18,6 +18,14 @@ public:
     ~SortedPQ() {
     }
 
+    bool isEmpty() {
+        return queue.empty();
+    }
+
+    int size() {
+        return queue.size();
+    }
+
     void insertItem ( Type data ) {
         if (queue.empty()) {
             queue.push_back(data);

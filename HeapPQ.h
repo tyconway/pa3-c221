@@ -18,6 +18,14 @@ public:
     ~HeapPQ() {
     }
 
+    bool isEmpty() {
+        return (vec.empty());
+    }
+
+    int size() {
+        return vec.size();
+    }
+
     void insertItem ( Type data ) {
         // printf("Inserted(%i)\n", data);
         vec.push_back(data);

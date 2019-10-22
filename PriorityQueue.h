@@ -23,20 +23,20 @@ public:
 
    ~PriorityQueue() {}
 
-   bool isEmpty() { return s == 0; }
+   virtual bool isEmpty() = 0;
 
-   int size() { return s; }
+   virtual int size() = 0;
 
    // inserts a piece of data into the priority queue
-   void insertItem ( Type data ) {}
+   virtual void insertItem ( Type data ) = 0;
 
    // removes and returns the minimum value in the queue
    // throws an exception if the queue is empty
-   Type removeMin () {}
+   virtual Type removeMin () = 0;
 
    // return the minimum value in the queue without removing it
    // throws an exception if the queue is empty
-   Type minValue () { return 0; }
+   virtual Type minValue () = 0;
 };
 
 #endif
