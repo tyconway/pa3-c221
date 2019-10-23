@@ -82,7 +82,7 @@ void taskInsert(int n, int logInterval) {
     string normal = "\033[0m";
     string blue = "\033[36m";
     // time insert to each implementation
-    cout << "Inserting and logging " << n << " numbers:\n";
+    cout << "Insert and log " << n << " numbers:\n";
     cout << "Unsorted: ";
     UnsortedPQ<int> *unsorted = new UnsortedPQ<int>();
     auto start = chrono::high_resolution_clock::now();
@@ -129,80 +129,47 @@ void taskInsert(int n, int logInterval) {
     cout << normal << endl;
 }
 
+template <class Type>
+void testInsertRemove(PriorityQueue<Type>& queue, int n) {
+    for (int insert = 0; insert < n; insert++) {
+        queue.insertItem(insert);
+    }
+    for (int insert = n; insert != 0; insert--) {
+        queue.removeMin();
+    }
+    return;
+}
+
 void taskInsertRemove(int n, int logInterval) {
+    cout << endl << "Insert, remove and log " << n << " numbers: ";
+
+    for (int i = 0; i < n; i += 100) {
+        UnsortedPQ<int> *unsorted = new UnsortedPQ<int>();
+        auto start = chrono::high_resolution_clock::now();
+        testInsertRemove(*unsorted, n);
+        auto curr = chrono::high_resolution_clock::now();
+        auto elapsed = curr - start;
+        log_csv("./logs/unsorted_insert_remove", elapsed, i);
+        delete unsorted;
+
+        SortedPQ<int> *sorted = new SortedPQ<int>();
+        start = chrono::high_resolution_clock::now();
+        testInsertRemove(*sorted, n);
+        curr = chrono::high_resolution_clock::now();
+        elapsed = curr - start;
+        log_csv("./logs/sorted_insert_remove", elapsed, i);
+        delete sorted;
+
+        HeapPQ<int> *heap = new HeapPQ<int>();
+        start = chrono::high_resolution_clock::now();
+        testInsertRemove(*heap, n);
+        curr = chrono::high_resolution_clock::now();
+        elapsed = curr - start;
+        log_csv("./logs/heap_insert_remove", elapsed, i);
+        delete heap;
+    }
     string green = "\033[32m";
-    string normal = "\033[0m";
-
-    cout << endl << "Insert, remove and log " << n << " numbers:\n";
-
-    cout << "Unsorted: ";
-    UnsortedPQ<int> *unsorted = new UnsortedPQ<int>();
-    auto start = chrono::high_resolution_clock::now();
-    for (int insert = 0; insert < n; insert++) {
-        unsorted->insertItem(insert);
-        if (insert % logInterval == 0) {
-            auto curr = chrono::high_resolution_clock::now();
-            auto elapsed = curr - start;
-            log_csv("./logs/unsorted_insert_remove", elapsed, insert);
-        }
-    }
-    for (int insert = n; insert != 0; insert--) {
-        unsorted->removeMin();
-        if (insert % logInterval == 0) {
-            auto curr = chrono::high_resolution_clock::now();
-            auto elapsed = curr - start;
-            log_csv("./logs/unsorted_insert_remove", elapsed, 2 * n - insert);
-        }
-    }
-    delete unsorted;
-    cout << "\rUnsorted: " << green << "Done";
-    cout << normal << endl;
-
-    cout << "Sorted: ";
-    SortedPQ<int> *sorted = new SortedPQ<int>();
-    start = chrono::high_resolution_clock::now();
-    for (int insert = 0; insert < n; insert++) {
-        sorted->insertItem(insert);
-        if (insert % logInterval == 0) {
-            auto curr = chrono::high_resolution_clock::now();
-            auto elapsed = curr - start;
-            log_csv("./logs/sorted_insert_remove", elapsed, insert);
-        }
-    }
-    for (int insert = n; insert != 0; insert--) {
-        sorted->removeMin();
-        if (insert % logInterval == 0) {
-            auto curr = chrono::high_resolution_clock::now();
-            auto elapsed = curr - start;
-            log_csv("./logs/sorted_insert_remove", elapsed, 2 * n - insert);
-        }
-    }
-    delete sorted;
-    cout << "\rSorted: " << green << "Done";
-    cout << normal << endl;
-
-    cout << "Heap: ";
-    HeapPQ<int> *heap = new HeapPQ<int>();
-    start = chrono::high_resolution_clock::now();
-    for (int insert = 0; insert < n; insert++) {
-        heap->insertItem(insert);
-        if (insert % logInterval == 0) {
-            auto curr = chrono::high_resolution_clock::now();
-            auto elapsed = curr - start;
-            log_csv("./logs/heap_insert_remove", elapsed, insert);
-        }
-    }
-    for (int insert = n; insert != 0; insert--) {
-        heap->removeMin();
-        if (insert % logInterval == 0) {
-            auto curr = chrono::high_resolution_clock::now();
-            auto elapsed = curr - start;
-            log_csv("./logs/heap_insert_remove", elapsed, 2 * n - insert);
-        }
-    }
-    delete heap;
-    cout << "\rHeap: " << green << "Done";
-    cout << normal << endl;
+    cout << green << "Done\n\033[0m";
 }
 
 #endif
