@@ -40,24 +40,28 @@ void insertNumbersPrint(PriorityQueue<Type>& queue, vector<int>& numbers) {
 void log_csv(string filename, chrono::duration<double, nano> elapsed, int currPushCount)
 {
     double millisecondsDenominator = 1000000; 
-    auto elapsed_seconds = elapsed/millisecondsDenominator;
+    double elapsed_seconds = elapsed.count()/millisecondsDenominator;
     ofstream ofs;
     ofs.open(filename, ios::app);
-    ofs << currPushCount << "," << elapsed_seconds.count() << "\n";
+    ofs << currPushCount << "," << elapsed_seconds << "\n";
     ofs.close();
 }
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // TASKS
 void taskNumbers() {
-    cout << endl; 
-
+    
     // Converts numbers.txt to vector
     string file = "numbers.txt";
     vector<int> data = parseFile(file);
     int type = data[0];
     vector<int> numbers(data.begin() + 2, data.end());
 
+    string blue = "\033[36m";
+    string normal = "\033[0m";
+    cout << blue;
+    cout << "\nSorting " << data[1] << " numbers from numbers.txt:\n";
+    cout << normal;
     if (type == 0) {
         UnsortedPQ<int>* queue = new UnsortedPQ<int>();
         insertNumbersPrint(*queue, numbers);
@@ -74,10 +78,18 @@ void taskNumbers() {
         printf("Invalid type requested.");
         return;
     }
+    cout << endl;
 }
 
 void taskInsert(int n, int logInterval) {
+    string green = "\033[32m";
+    string blue = "\033[36m";
+    string normal = "\033[0m";
     // time insert to each implementation
+    cout << blue;
+    cout << "Inserting and logging " << n << " numbers:\n";
+    cout << normal;
+    cout << "Unsorted: ";
     UnsortedPQ<int> *unsorted = new UnsortedPQ<int>();
     auto start = chrono::high_resolution_clock::now();
     for (int insert = 0; insert <= n; insert++) {
@@ -86,12 +98,13 @@ void taskInsert(int n, int logInterval) {
             auto curr = chrono::high_resolution_clock::now();
             auto elapsed = curr - start;
             log_csv("./logs/unsorted_insert", elapsed, insert);
-            cout << "\rUnsorted: " << insert;
         }
     }
+    cout << "\rUnsorted: " << green << "Done";
+    cout << normal << endl;
     delete unsorted;
-    cout << endl;
 
+    cout << "Sorted: ";
     SortedPQ<int> *sorted = new SortedPQ<int>();
     start = chrono::high_resolution_clock::now();
     for (int insert = 0; insert <= n; insert++) {
@@ -100,12 +113,13 @@ void taskInsert(int n, int logInterval) {
             auto curr = chrono::high_resolution_clock::now();
             auto elapsed = curr - start;
             log_csv("./logs/sorted_insert", elapsed, insert);
-            cout << "\rSorted: " << insert;
         }
     }
     delete sorted;
-    cout << endl;
+    cout << "\rSorted: " << green << "Done";
+    cout << normal << endl;
 
+    cout << "Heap: ";
     HeapPQ<int> *heap = new HeapPQ<int>();
     start = chrono::high_resolution_clock::now();
     for (int insert = 0; insert <= n; insert++) {
@@ -114,10 +128,27 @@ void taskInsert(int n, int logInterval) {
             auto curr = chrono::high_resolution_clock::now();
             auto elapsed = curr - start;
             log_csv("./logs/heap_insert", elapsed, insert);
-            cout << "\rHeap: " << insert;
         }
     }
     delete heap;
+    cout << "\rHeap: " << green << "Done";
+    cout << normal << endl;
+}
+
+void taskInsertRemove(int n, int logInterval) {
+    cout << endl << "Insert and Remove:\n";
+    UnsortedPQ<int> *unsorted = new UnsortedPQ<int>();
+    auto start = chrono::high_resolution_clock::now();
+    for (int insert = 0; insert <= n; insert++) {
+        unsorted->insertItem(insert);
+        if (insert % logInterval == 0) {
+            auto curr = chrono::high_resolution_clock::now();
+            auto elapsed = curr - start;
+            log_csv("./logs/unsorted_insert_remove", elapsed, insert);
+            cout << "\rUnsorted: " << insert;
+        }
+    }
+    delete unsorted;
     cout << endl;
 }
 
