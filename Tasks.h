@@ -5,6 +5,7 @@
 #include <fstream>
 #include <vector>
 #include <string>
+#include <chrono>
 #include "UnsortedPQ.h"
 #include "SortedPQ.h"
 #include "HeapPQ.h"
@@ -36,6 +37,16 @@ void insertNumbersPrint(PriorityQueue<Type>& queue, vector<int>& numbers) {
     cout << normal << endl;
 }
 
+void log_csv(string filename, chrono::duration<double, nano> elapsed, int currPushCount)
+{
+    double millisecondsDenominator = 1000000; 
+    auto elapsed_seconds = elapsed/millisecondsDenominator;
+    ofstream ofs;
+    ofs.open(filename, ios::app);
+    ofs << currPushCount << "," << elapsed_seconds.count() << "\n";
+    ofs.close();
+}
+
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // TASKS
 void taskNumbers() {
@@ -65,6 +76,18 @@ void taskNumbers() {
     }
 }
 
-
+void taskInsert(int n, int logInterval) {
+    // time insert to each implementation
+    UnsortedPQ<int> *queue = new UnsortedPQ<int>();
+    auto start = chrono::high_resolution_clock::now();
+    for (int insert = 0; insert < n; insert++) {
+        queue->insertItem(insert);
+        if (insert % logInterval == 0) {
+            auto curr = chrono::high_resolution_clock::now();
+            auto elapsed = curr - start;
+            log_csv("./logs/unsorted_insert", elapsed, insert);
+        }
+    }
+}
 
 #endif
