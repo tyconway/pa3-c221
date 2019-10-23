@@ -2,6 +2,6 @@
 
 int main() {
     taskNumbers();
-    taskInsert(100, 10);
+    taskInsert(100000, 1000);
     // taskInsertRemove();
 }

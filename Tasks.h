@@ -78,16 +78,47 @@ void taskNumbers() {
 
 void taskInsert(int n, int logInterval) {
     // time insert to each implementation
-    UnsortedPQ<int> *queue = new UnsortedPQ<int>();
+    UnsortedPQ<int> *unsorted = new UnsortedPQ<int>();
     auto start = chrono::high_resolution_clock::now();
-    for (int insert = 0; insert < n; insert++) {
-        queue->insertItem(insert);
+    for (int insert = 0; insert <= n; insert++) {
+        unsorted->insertItem(insert);
         if (insert % logInterval == 0) {
             auto curr = chrono::high_resolution_clock::now();
             auto elapsed = curr - start;
             log_csv("./logs/unsorted_insert", elapsed, insert);
+            cout << "\rUnsorted: " << insert;
         }
     }
+    delete unsorted;
+    cout << endl;
+
+    SortedPQ<int> *sorted = new SortedPQ<int>();
+    start = chrono::high_resolution_clock::now();
+    for (int insert = 0; insert <= n; insert++) {
+        sorted->insertItem(insert);
+        if (insert % logInterval == 0) {
+            auto curr = chrono::high_resolution_clock::now();
+            auto elapsed = curr - start;
+            log_csv("./logs/sorted_insert", elapsed, insert);
+            cout << "\rSorted: " << insert;
+        }
+    }
+    delete sorted;
+    cout << endl;
+
+    HeapPQ<int> *heap = new HeapPQ<int>();
+    start = chrono::high_resolution_clock::now();
+    for (int insert = 0; insert <= n; insert++) {
+        heap->insertItem(insert);
+        if (insert % logInterval == 0) {
+            auto curr = chrono::high_resolution_clock::now();
+            auto elapsed = curr - start;
+            log_csv("./logs/heap_insert", elapsed, insert);
+            cout << "\rHeap: " << insert;
+        }
+    }
+    delete heap;
+    cout << endl;
 }
 
 #endif
