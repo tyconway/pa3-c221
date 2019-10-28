@@ -42,7 +42,8 @@ void log_csv(string filename, chrono::duration<double, nano> elapsed, int currPu
     double millisecondsDenominator = 1000000; 
     double elapsed_seconds = elapsed.count()/millisecondsDenominator;
     ofstream ofs;
-    ofs.open(filename, ios::app);
+    string csv_filename = filename + ".csv";
+    ofs.open(csv_filename, ios::app);
     ofs << currPushCount << "," << elapsed_seconds << "\n";
     ofs.close();
 }
