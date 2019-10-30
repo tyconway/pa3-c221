@@ -27,7 +27,7 @@ public:
     }
 
     void insertItem ( Type data ) {
-        if (queue.empty()) {
+        if (queue.empty() || data > queue.back()) {
             queue.push_back(data);
             return;
         }
