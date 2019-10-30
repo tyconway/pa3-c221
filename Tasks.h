@@ -156,9 +156,10 @@ void taskInsertRemove(int n, int logInterval) {
     cout << endl << "Insert, remove and log " << n << " numbers: ";
 
     for (int i = 0; i < n; i += 100) {
+	cout << "\nBegin";
         UnsortedPQ<int> *unsorted = new UnsortedPQ<int>();
         auto start = chrono::high_resolution_clock::now();
-        testInsertRemove(*unsorted, n);
+        testInsertRemove(*unsorted, i);
         auto curr = chrono::high_resolution_clock::now();
         auto elapsed = curr - start;
         log_csv("./logs/unsorted_insert_remove", elapsed, i);
@@ -166,7 +167,7 @@ void taskInsertRemove(int n, int logInterval) {
 
         SortedPQ<int> *sorted = new SortedPQ<int>();
         start = chrono::high_resolution_clock::now();
-        testInsertRemove(*sorted, n);
+        testInsertRemove(*sorted, i);
         curr = chrono::high_resolution_clock::now();
         elapsed = curr - start;
         log_csv("./logs/sorted_insert_remove", elapsed, i);
@@ -174,7 +175,7 @@ void taskInsertRemove(int n, int logInterval) {
 
         HeapPQ<int> *heap = new HeapPQ<int>();
         start = chrono::high_resolution_clock::now();
-        testInsertRemove(*heap, n);
+        testInsertRemove(*heap, i);
         curr = chrono::high_resolution_clock::now();
         elapsed = curr - start;
         log_csv("./logs/heap_insert_remove", elapsed, i);
@@ -183,7 +184,7 @@ void taskInsertRemove(int n, int logInterval) {
         cout << "\r" << i << "/" << n;
     }
     string green = "\033[32m";
-    cout << green << "Done\n\033[0m";
+    cout << green << "\nDone\n\033[0m";
 }
 
 #endif
