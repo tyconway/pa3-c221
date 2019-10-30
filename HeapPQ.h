@@ -30,7 +30,8 @@ public:
         // printf("Inserted(%i)\n", data);
         vec.push_back(data);
 
-        fixHeap();
+        // fixHeap();
+        upHeap(vec.size() - 1);
         return;
     }
 
@@ -40,8 +41,10 @@ public:
         swap(0, vec.size() - 1);
         Type remove = vec.back();
         vec.pop_back();
+        // printf("\nRemoved(%i)\n", remove);
 
-        fixHeap();
+        // fixHeap();
+        downHeap(0);
 
         return remove;
     }
@@ -66,8 +69,57 @@ public:
         }
     }
 
+    void upHeap(int child) {
+        // cout << "upHeap: ";
+        // print();
+        // cout << "\n";
+        int parent = parentIndex(child);
+        if (vec[child] >= vec[parent] || child == 0) {
+            return;
+        }
+        else if (vec[child] < vec[parent]) {
+            swap(child, parent);
+            upHeap(parent);
+        }
+    }
+
+    void downHeap(int parent) {
+        // cout << "\n";
+        // cout << "downHeap: ";
+        // print();
+        int left = leftChildIndex(parent);
+        int right = rightChildIndex(parent);
+        if (left == -1 || right == - 1) { return; }
+        if (vec[left] >= vec[parent] && vec[right] >= vec[parent]) { return; }
+
+        // If we've reached here, then vec[parent] > one of the children
+        if (vec[left] < vec[right]) {
+            swap(left, parent);
+            downHeap(left);
+        }
+        else if (vec[left] >= vec[right]) {
+            swap(right, parent);
+            downHeap(right);
+        }
+    }
+
     int parentIndex(int childIndex) {
-        return (childIndex - 1) / 2;
+        int parent = (childIndex - 1) / 2;
+        if (parent < 0) { return 0; }
+        return parent;
+    }
+
+    int leftChildIndex(int parentIndex) {
+        int left = 2 * parentIndex + 1;
+        if (left > vec.size() - 1) { return -1; }
+        return left;
+    }
+
+    int rightChildIndex(int parentIndex) {
+        int right = 2 * parentIndex + 2;
+        int last = vec.size() - 1;
+        if (right > last) { return -1; }
+        return right;
     }
 
     void swap(int leftIndex, int rightIndex) {
@@ -80,7 +132,6 @@ public:
         for (auto x : vec) {
             cout << x << " ";
         }
-        cout << endl;
     }
 };
 

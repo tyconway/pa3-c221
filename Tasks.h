@@ -6,6 +6,8 @@
 #include <vector>
 #include <string>
 #include <chrono>
+#include <ctime>
+#include <cstdlib>
 #include "UnsortedPQ.h"
 #include "SortedPQ.h"
 #include "HeapPQ.h"
@@ -32,7 +34,7 @@ void insertNumbersPrint(PriorityQueue<Type>& queue, vector<int>& numbers) {
     }
 
     for (auto num : numbers) {
-        cout << green << queue.removeMin() << " ";
+        cout << queue.removeMin() << " ";
     }
     cout << normal << endl;
 }
@@ -133,7 +135,16 @@ void taskInsert(int n, int logInterval) {
 template <class Type>
 void testInsertRemove(PriorityQueue<Type>& queue, int n) {
     for (int insert = 0; insert < n; insert++) {
-        queue.insertItem(insert);
+        // Random:
+        int r = (rand() % 1000) + 1;
+        queue.insertItem(r);
+
+        // Decreasing:
+        // int num = (insert - n) * (-1);
+        // queue.insertItem(num);
+
+        // Increasing:
+        // queue.insertItem(insert);
     }
     for (int insert = n; insert != 0; insert--) {
         queue.removeMin();
@@ -168,6 +179,8 @@ void taskInsertRemove(int n, int logInterval) {
         elapsed = curr - start;
         log_csv("./logs/heap_insert_remove", elapsed, i);
         delete heap;
+
+        cout << "\r" << i << "/" << n;
     }
     string green = "\033[32m";
     cout << green << "Done\n\033[0m";
