@@ -155,7 +155,7 @@ void testInsertRemove(PriorityQueue<Type>& queue, int n) {
 void taskInsertRemove(int n, int logInterval) {
     cout << endl << "Insert, remove and log " << n << " numbers: ";
 
-    for (int i = 0; i < n; i += 100) {
+    for (int i = 0; i < n; i += logInterval) {
 	cout << "\nBegin";
         UnsortedPQ<int> *unsorted = new UnsortedPQ<int>();
         auto start = chrono::high_resolution_clock::now();
